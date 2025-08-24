@@ -28,7 +28,7 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
                     {
                         Name = "AROCKIA DIVYA A",
                         Email = "msvijaya98@gmail.com",
-                        Url = new Uri("https://github.com/aro26")
+                        Url = new Uri("https://github.com/aro26/TaskManagementSystem")
                     }
                 });
         }
