@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Task.Entities;
+using TaskManagementSystem.Task.Entities;
 
 namespace TaskManagementSystem.SqlLite
 {
@@ -9,5 +10,6 @@ namespace TaskManagementSystem.SqlLite
 
         // DbSet = Table in SQLite
         public DbSet<TaskItem> Tasks { get; set; }
+        public DbSet<UserEF> Users { get; set; }
     }
 }

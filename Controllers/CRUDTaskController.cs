@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace TaskManagementSystem.Controllers
     ///  This controller manages task-related operations.
     /// including creation, retrieval, updating, and deletion.
     /// </summary>
+    [Authorize]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class CRUDTaskController : ControllerBase
@@ -43,6 +45,7 @@ namespace TaskManagementSystem.Controllers
         /// </summary>
         /// <returns>An object containing task summary details with response code.</returns>
         /// <response code="200">Returns the list of tasks.</response>
+        [Authorize(Roles = "Admin")]
         [HttpGet("GetAllTask", Name = "GetAllTask")]
         public IActionResult GetAllTasks()
         {
@@ -58,6 +61,7 @@ namespace TaskManagementSystem.Controllers
         /// <response code="204">Task updated successfully.</response>
         /// <response code="400">If the task is invalid.</response>
         /// <response code="404">If the task is not found.</response>
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}", Name = "UpdateTask")]
         public IActionResult UpdateTask(int id,[FromBody] TaskItem task)
         {
@@ -81,6 +85,7 @@ namespace TaskManagementSystem.Controllers
         /// <param name="isCompleted">Completion status to update.</param>
         /// <response code="204">Task updated successfully.</response>
         /// <response code="404">If the task is not found.</response>
+        [Authorize(Roles = "Admin")]
         [HttpPatch("{id}",Name = "PartialUpdateTask")]
         public IActionResult PartialUpdateTask(int id, [FromQuery] string Status)
         {
@@ -103,6 +108,7 @@ namespace TaskManagementSystem.Controllers
         /// <param name="id">ID of the task.</param>
         /// <response code="200">Returns the requested task.</response>
         /// <response code="404">If the task is not found.</response>
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id}",Name = "GetTaskById")]
         public IActionResult GetTaskById([Required] int id)
         {
@@ -117,6 +123,7 @@ namespace TaskManagementSystem.Controllers
         /// <param name="id">ID of the task.</param>
         /// <response code="204">Task deleted successfully.</response>
         /// <response code="404">If the task is not found.</response>
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}", Name = "DeleteTask")]
         public IActionResult DeleteTask(int id)
         {
